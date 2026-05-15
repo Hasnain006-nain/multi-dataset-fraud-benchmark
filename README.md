@@ -1,43 +1,78 @@
 <div align="center">
 
-# 🚨 Beyond Single-Dataset Evaluation  
+# 🚨 Beyond Single-Dataset Evaluation
 ## A Multi-Dataset Benchmark of SMOTE, Focal Loss, and XGBoost for Explainable Fraud Detection
+
+<br>
 
 <img src="https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python">
 <img src="https://img.shields.io/badge/XGBoost-Fraud%20Detection-red?style=for-the-badge">
 <img src="https://img.shields.io/badge/Deep%20Learning-Focal%20Loss-purple?style=for-the-badge">
 <img src="https://img.shields.io/badge/Explainable%20AI-SHAP-green?style=for-the-badge">
 <img src="https://img.shields.io/badge/Research-Multi--Dataset-orange?style=for-the-badge">
+<img src="https://img.shields.io/badge/Status-Research%20Project-success?style=for-the-badge">
 
-### 🔍 Explainable Fraud Detection Across Multiple Financial Datasets  
+<br><br>
+
+### 🔍 Explainable Fraud Detection Benchmark Across Multiple Financial Datasets
+
 ### ⚡ SMOTE + XGBoost + Focal Loss + SHAP + Statistical Validation
+
+<br>
 
 </div>
 
 ---
 
-# 📌 Project Overview
+# 📌 Table of Contents
 
-Financial fraud detection suffers from two major problems:
+- [📖 Overview](#-overview)
+- [🚀 Key Contributions](#-key-contributions)
+- [📊 Datasets](#-datasets)
+- [📥 Dataset Sources](#-dataset-sources)
+- [🧠 Models Evaluated](#-models-evaluated)
+- [⚙️ Techniques Used](#️-techniques-used)
+- [📂 Repository Structure](#-repository-structure)
+- [📈 Evaluation Metrics](#-evaluation-metrics)
+- [🏆 Best Results](#-best-results)
+- [📷 Figures Included](#-figures-included)
+- [🔍 Explainability (SHAP)](#-explainability-shap)
+- [⚡ Deployment Analysis](#-deployment-analysis)
+- [💻 Installation](#-installation)
+- [▶️ Running the Project](#️-running-the-project)
+- [📦 Libraries Used](#-libraries-used)
+- [📚 Research Highlights](#-research-highlights)
+- [🔮 Future Work](#-future-work)
+- [📄 Citation](#-citation)
+- [⭐ Final Conclusion](#-final-conclusion)
 
-- Severe **class imbalance**
-- Poor **generalization across datasets**
+---
 
-Most research evaluates models on only **one dataset**, making results difficult to trust in real-world deployment.
+# 📖 Overview
 
-This project introduces a **large-scale multi-dataset fraud detection benchmark** combining:
+Financial fraud detection remains one of the most challenging problems in machine learning due to:
+
+- Extreme class imbalance
+- Evolving fraud behavior
+- Poor cross-dataset generalization
+- Lack of explainability in AI systems
+
+Most existing studies evaluate models on only a **single dataset**, making it difficult to assess real-world robustness.
+
+This project introduces a comprehensive **multi-dataset fraud detection benchmark** combining:
 
 ✅ Traditional Machine Learning  
 ✅ Deep Learning  
 ✅ SMOTE Oversampling  
 ✅ Focal Loss  
 ✅ SHAP Explainability  
-✅ McNemar Statistical Testing  
-✅ Real-Time Latency Analysis  
+✅ Statistical Validation  
+✅ Real-Time Latency Benchmarking  
+✅ Cross-Dataset Generalization  
 
 ---
 
-# 🚀 Research Contributions
+# 🚀 Key Contributions
 
 <div align="center">
 
@@ -47,14 +82,108 @@ This project introduces a **large-scale multi-dataset fraud detection benchmark*
 | SMOTE Evaluation | ✅ |
 | Focal Loss Evaluation | ✅ |
 | SHAP Explainability | ✅ |
-| Statistical Validation | ✅ |
-| ROC + PR Analysis | ✅ |
+| McNemar Statistical Testing | ✅ |
+| ROC & PR Curve Analysis | ✅ |
 | MCC Evaluation | ✅ |
 | Real-Time Latency Testing | ✅ |
-| Cross-Dataset Generalization | ✅ |
+| Cross-Dataset Validation | ✅ |
 | Deep Learning Benchmarking | ✅ |
 
 </div>
+
+---
+
+# 📊 Datasets
+
+---
+
+## 🏦 D1 — Kaggle Credit Card Fraud Dataset
+
+### Description
+
+Real-world European credit card transactions with highly imbalanced fraud labels.
+
+### Dataset Statistics
+
+| Metric | Value |
+|---|---|
+| Total Transactions | 284,807 |
+| Fraud Cases | 492 |
+| Fraud Ratio | 0.17% |
+
+### Main Features
+
+- PCA-transformed features (V1–V28)
+- Time
+- Amount
+
+---
+
+## 🌐 D2 — Online Transaction Fraud Dataset
+
+### Description
+
+Online financial transaction dataset containing merchant, category, amount, balances, and transaction metadata.
+
+### Dataset Statistics
+
+| Metric | Value |
+|---|---|
+| Dataset Size | ~300,000 |
+| Fraud Type | Online Transaction Fraud |
+
+### Main Features
+
+- Merchant
+- Category
+- Amount
+- Transaction Type
+- Account Balances
+
+---
+
+## 📱 D3 — PaySim Mobile Money Dataset
+
+### Description
+
+Synthetic mobile money transaction simulator based on real financial transaction patterns.
+
+### Dataset Statistics
+
+| Metric | Value |
+|---|---|
+| Dataset Size | ~200,000 |
+| Domain | Mobile Money Fraud |
+
+### Main Features
+
+- Step
+- Type
+- Amount
+- oldbalanceOrg
+- newbalanceOrig
+
+---
+
+# 📥 Dataset Sources
+
+---
+
+## 🏦 Kaggle Credit Card Fraud Dataset
+
+🔗 https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+
+---
+
+## 🌐 Online Transaction Fraud Dataset
+
+🔗 https://www.kaggle.com/datasets/kartik2112/fraud-detection
+
+---
+
+## 📱 PaySim Mobile Money Dataset
+
+🔗 https://www.kaggle.com/datasets/ealaxi/paysim1
 
 ---
 
@@ -77,60 +206,31 @@ This project introduces a **large-scale multi-dataset fraud detection benchmark*
 
 ---
 
-# 📊 Datasets
-
-## 🏦 D1 — Kaggle Credit Card Fraud
-
-- 284,807 transactions
-- 492 fraud cases
-- Fraud ratio: **0.17%**
-- PCA-transformed financial features
-
----
-
-## 🌐 D2 — Online Transaction Fraud
-
-- Online financial transactions
-- Merchant + category features
-- Realistic transaction behavior
-- ~300,000 samples
-
----
-
-## 📱 D3 — PaySim Mobile Money
-
-- Mobile money simulation dataset
-- African mobile transfer behavior
-- Balance and transaction analysis
-- ~200,000 samples
-
----
-
-# 🧪 Techniques Used
+# ⚙️ Techniques Used
 
 ---
 
 ## ⚖️ SMOTE — Class Imbalance Mitigation
 
-SMOTE generates synthetic fraud samples to balance the minority fraud class.
+SMOTE (Synthetic Minority Over-sampling Technique) was used to balance fraud classes.
 
 ### Benefits
 
-- Improved Recall
-- Better minority learning
-- Reduced model bias
+✅ Improved Recall  
+✅ Better Minority Learning  
+✅ Reduced Majority Bias  
 
 ---
 
 ## 🎯 Focal Loss
 
-Focal Loss forces deep learning models to focus on difficult fraud samples.
+Focal Loss was integrated into deep learning models to focus learning on hard fraud samples.
 
 ### Benefits
 
-- Better hard-example learning
-- Improved fraud sensitivity
-- Stronger minority classification
+✅ Better Hard Example Learning  
+✅ Improved Fraud Sensitivity  
+✅ Stronger Minority Classification  
 
 ---
 
@@ -138,7 +238,7 @@ Focal Loss forces deep learning models to focus on difficult fraud samples.
 
 SHAP explains:
 
-- Why a transaction is flagged
+- Why a transaction is classified as fraud
 - Which features influence predictions
 - Model decision transparency
 
@@ -153,7 +253,7 @@ Implemented for:
 
 Used for rigorous pairwise model comparison.
 
-Advantages:
+### Advantages
 
 ✅ More reliable than t-tests  
 ✅ Exact classifier comparison  
@@ -212,24 +312,42 @@ multi-dataset-fraud-benchmark/
 
 ---
 
+# 📈 Evaluation Metrics
+
+This project evaluates models using:
+
+| Metric | Purpose |
+|---|---|
+| Recall | Fraud detection sensitivity |
+| Precision | False alarm reduction |
+| F1 Score | Precision/Recall balance |
+| ROC-AUC | Class discrimination |
+| PR-AUC | Imbalance-aware evaluation |
+| MCC | Balanced classification quality |
+| Accuracy | Overall correctness |
+
+---
+
 # 🏆 Best Results
 
 <div align="center">
 
-## 🥇 Best Overall Model  
-# Model B — SMOTE + XGBoost
+# 🥇 Best Overall Model
+## Model B — SMOTE + XGBoost
 
 </div>
 
+---
+
 | Dataset | Recall | ROC-AUC | PR-AUC |
 |---|---|---|---|
-| D1 | 0.800 | 0.972 | 0.810 |
-| D2 | 0.897 | 0.995 | 0.885 |
-| D3 | 0.984 | 0.999 | 0.987 |
+| D1 (Kaggle CC) | 0.800 | 0.972 | 0.810 |
+| D2 (Online Fraud) | 0.897 | 0.995 | 0.885 |
+| D3 (PaySim) | 0.984 | 0.999 | 0.987 |
 
 ---
 
-# ⚡ Real-Time Deployment Performance
+# ⚡ Deployment Analysis
 
 | Metric | Performance |
 |---|---|
@@ -240,25 +358,7 @@ multi-dataset-fraud-benchmark/
 
 ---
 
-# 📉 Evaluation Metrics
-
-This project evaluates models using:
-
-- Recall
-- Precision
-- F1 Score
-- ROC-AUC
-- PR-AUC
-- MCC
-- Accuracy
-
-### 🎯 Primary Metric
-
-> Recall — Percentage of fraud transactions successfully detected
-
----
-
-# 📷 Included Visualizations
+# 📷 Figures Included
 
 <div align="center">
 
@@ -271,7 +371,7 @@ This project evaluates models using:
 | Figure 5 | ROC curves |
 | Figure 6 | Precision-Recall curves |
 | Figure 7 | Recall comparison |
-| Figure 8 | Training time |
+| Figure 8 | Training time comparison |
 | Figure 9 | Inference latency |
 | Figure 10 | Cross-dataset generalization |
 | Figure 11 | MCC comparison |
@@ -284,11 +384,13 @@ This project evaluates models using:
 
 ---
 
-# 🔥 SHAP Explainability Highlights
+# 🔍 Explainability (SHAP)
 
-## Kaggle Dataset
+---
 
-Top features:
+## 🏦 Kaggle Dataset
+
+Top Features:
 
 - V14
 - V12
@@ -297,9 +399,9 @@ Top features:
 
 ---
 
-## Online Fraud Dataset
+## 🌐 Online Fraud Dataset
 
-Top features:
+Top Features:
 
 - amount
 - merchant
@@ -307,9 +409,9 @@ Top features:
 
 ---
 
-## PaySim Dataset
+## 📱 PaySim Dataset
 
-Top features:
+Top Features:
 
 - oldbalanceOrg
 - newbalanceOrig
@@ -319,6 +421,8 @@ Top features:
 ---
 
 # 💻 Installation
+
+---
 
 ## Clone Repository
 
@@ -360,7 +464,7 @@ notebooks/Untitled.ipynb
 
 ---
 
-# 📦 Main Libraries
+# 📦 Libraries Used
 
 ```python
 pandas
@@ -399,13 +503,13 @@ scipy
 
 # 🔮 Future Work
 
-Future extensions may include:
+Potential future extensions include:
 
 - Graph Neural Networks (GNNs)
 - Federated Fraud Learning
 - Transformer-based Fraud Detection
-- Adaptive Concept Drift Handling
 - Real-Time Streaming Fraud Detection
+- Adaptive Concept Drift Handling
 - Explainable Ensemble Systems
 
 ---
@@ -431,6 +535,7 @@ Future extensions may include:
 ✅ Real-world deployment analysis  
 ✅ Publication-quality visualizations  
 ✅ Reproducible experiments  
+✅ Research-grade methodology  
 
 ---
 
@@ -440,16 +545,16 @@ Future extensions may include:
 
 This repository demonstrates that:
 
-## 🔥 SMOTE + XGBoost provides the best balance between:
+# 🔥 SMOTE + XGBoost provides the best balance between:
 
-### Fraud Recall ⚡  
-### Explainability 🔍  
-### Speed 🚀  
-### Real-Time Deployment 💻  
+### Fraud Recall ⚡
+### Explainability 🔍
+### Speed 🚀
+### Real-Time Deployment 💻
 ### Cross-Dataset Robustness 🌍
 
----
+<br>
 
-### ⭐ If you found this project useful, consider starring the repository.
+## ⭐ If you found this project useful, consider starring the repository.
 
 </div>
