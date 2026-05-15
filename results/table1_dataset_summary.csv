@@ -1,0 +1,4 @@
+Dataset,Total rows,Fraud cases,Fraud rate,Imbalance ratio,Test fraud
+D1 (Kaggle CC),"283,726",473,0.1667%,598:1,95
+D2 (Online Fraud),"300,000","2,145",0.7150%,138:1,429
+D3 (PaySim),"200,000","4,497",2.2485%,43:1,899

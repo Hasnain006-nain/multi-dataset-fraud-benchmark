@@ -1,0 +1,9 @@
+Study,Method,Datasets,Recall (D1),Stat. Test,MCC reported,SHAP,Train time
+Albalawi & Dardouri (2025),RF+DL+Focal Loss,2,100%*,No,No,No,NR
+Rahmadani et al. (2025),XGBoost+SMOTE+GridSearchCV,1,85%,No,No,No,NR
+Patel et al. (2025),XGBoost+SMOTE-ENN,1,89%,No,No,No,NR
+Asnawi et al. (2025),XGBoost+SMOTE,1,82%,No,No,No,NR
+Du et al. (2024),AE+XGBoost+SMOTE+CGAN,1,89.3%,No,Yes (0.884),No,NR
+Anitha et al. (2025),XGBoost+SMOTE-Tomek,1,94.1%,No,No,No,~35ms/sample
+★ OUR WORK (Model B: SMOTE+XGBoost),SMOTE+XGBoost (simple),3,80.0%,McNemar,0.723,Yes,16s
+★ OUR WORK (Model E4: MLP+Focal+SMOTE),MLP+Focal Loss+SMOTE,3,75.8%,McNemar,0.701,Yes,1965s
