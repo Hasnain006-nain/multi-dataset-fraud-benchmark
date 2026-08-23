@@ -32,6 +32,10 @@ Financial fraud detection presents unique challenges including extreme class imb
 The experimental workflow follows a strict leakage-proof pipeline:
 
 <div align="center">
+<img src="Figures/Fig1.png" alt="Workflow Diagram" width="900">
+</div>
+
+**Pipeline Steps:**
 
 | Layer | Description |
 |-------|-------------|
@@ -43,8 +47,6 @@ The experimental workflow follows a strict leakage-proof pipeline:
 | **Final Evaluation Layer** | PR-AUC, Recall, Precision, Expected cost per 10k, False alerts per 10k, Top-k alert budget, Bootstrap 95% confidence intervals, McNemar-Holm statistical testing |
 | **Deployment & Trust Layer** | Repeated inference latency profiling, Temporal/concept-drift validation, Calibration analysis, SHAP global explanations, SHAP local audit |
 | **Output** | Validated Explainable Fraud Detection Benchmark |
-
-</div>
 
 ---
 
