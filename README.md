@@ -32,7 +32,7 @@ Financial fraud detection presents unique challenges including extreme class imb
 The experimental workflow follows a strict leakage-proof pipeline:
 
 <div align="center">
-<img src="Figures/Fig1.png" alt="Workflow Diagram" width="900">
+<img src="figures/Fig1.png" alt="Workflow Diagram" width="900">
 </div>
 
 **Pipeline Steps:**
