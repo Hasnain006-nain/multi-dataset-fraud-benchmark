@@ -416,7 +416,7 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## 👥 Contributors
 
-- **Hasnain Haider** — [@hasnain006](https://github.com/hasnain006)
+- **Hasnain Haider** — [@hasnain006](https://github.com/Hasnain006-nain)
 
 ---
 
