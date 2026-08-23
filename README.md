@@ -20,9 +20,11 @@
 
 ---
 
-## 📖 Abstract
+## 🚀 Workflow Overview
 
-Financial fraud detection presents unique challenges including extreme class imbalance, concept drift, and the critical need for explainability. This benchmark study evaluates a comprehensive suite of machine learning and deep learning models across **three diverse fraud datasets** using a **leakage-proof experimental workflow**. We demonstrate that **XGBoost with SMOTE oversampling** achieves the strongest balance between fraud recall, explainability, and real-time performance, while **MLP with Focal Loss** provides competitive deep learning alternatives. The framework incorporates rigorous statistical validation via **McNemar-Holm testing**, **bootstrap confidence intervals**, **SHAP explainability**, and **temporal drift validation**—establishing a robust benchmark for production-ready fraud detection systems.
+<div align="center">
+<img src="Figures/Fig1.png" alt="Workflow Diagram" width="900">
+</div>
 
 ---
 
@@ -57,26 +59,6 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 | **Kaggle Credit Card** | Kaggle | [creditcardfraud](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) |
 | **Online Transaction Fraud** | Kaggle | [fraud-detection](https://www.kaggle.com/datasets/kartik2112/fraud-detection) |
 | **PaySim Mobile Money** | Kaggle | [paysim1](https://www.kaggle.com/datasets/ealaxi/paysim1) |
-
----
-
-## 🚀 Workflow Overview
-
-The experimental workflow follows a strict leakage-proof pipeline:
-
-<div align="center">
-<img src="Figures/Fig1.png" alt="Workflow Diagram" width="800">
-</div>
-
-**Pipeline Steps:**
-
-1. **Raw Data** → Train/Validation/Test Split (stratified)
-2. **Preprocessing** fitted on Training Only
-3. **Resampling** (SMOTE/ADASYN) applied only to Training
-4. **Model Training** on resampled training data
-5. **Threshold Tuning** on validation data
-6. **Final Evaluation** on held-out test data
-7. **Explainability & Drift Analysis** using SHAP and statistical tests
 
 ---
 
