@@ -178,16 +178,7 @@ McNemar-Holm adjusted p-values for pairwise model comparisons.
 ### Fig 12-13: SHAP Explainability
 Global feature importance and local case-level explanations for model interpretability.
 
----
 
-## 🔗 Related Resources
-
-| Resource | Link |
-|----------|------|
-| **Main README** | [../README.md](../README.md) |
-| **Results CSV** | [../Results/](../Results/) |
-| **Notebook** | [../Notebooks/Code.ipynb](../Notebooks/Code.ipynb) |
-| **Models** | [../Models/](../Models/) |
 
 ---
 
