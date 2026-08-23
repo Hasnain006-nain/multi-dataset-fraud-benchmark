@@ -31,18 +31,19 @@ Financial fraud detection presents unique challenges including extreme class imb
 The experimental workflow follows a strict leakage-proof pipeline:
 
 <div align="center">
-<img src="Figures/Fig1.png" alt="Workflow Diagram" width="900">
+
+| Layer | Description |
+|-------|-------------|
+| **Input Layer** | Public financial fraud datasets: D1 (Kaggle Credit Card), D2 (Online Fraud Transactions), D3 (PaySim Mobile Money) |
+| **Leakage-Proof Data Preparation** | Duplicate removal, invalid label cleaning, identifier and leakage-column removal, missing/infinite value handling, Train/Validation/Test split *(Preprocessing fitted on training only)* |
+| **Training-Only Preprocessing & Resampling** | Numerical Imputation + Robust Scaling, Categorical Imputation + One-Hot Encoding, Resampling (SMOTE/ADASYN) applied only to training *(Validation and test sets remain naturally imbalanced)* |
+| **Model Benchmarking Layer** | Logistic Regression, Random Forest, Balanced Random Forest, EasyEnsemble, XGBoost, XGBoost + scale_pos_weight, XGBoost + ADASYN, LightGBM, CatBoost, MLP + Focal Loss |
+| **Validation & Operating Threshold Layer** | Threshold tuning only on validation set, Cost-sensitive threshold selection, Frozen threshold for test evaluation |
+| **Final Evaluation Layer** | PR-AUC, Recall, Precision, Expected cost per 10k, False alerts per 10k, Top-k alert budget, Bootstrap 95% confidence intervals, McNemar-Holm statistical testing |
+| **Deployment & Trust Layer** | Repeated inference latency profiling, Temporal/concept-drift validation, Calibration analysis, SHAP global explanations, SHAP local audit |
+| **Output** | Validated Explainable Fraud Detection Benchmark |
+
 </div>
-
-**Pipeline Steps:**
-
-1. **Raw Data** → Train/Validation/Test Split (stratified)
-2. **Preprocessing** fitted on Training Only
-3. **Resampling** (SMOTE/ADASYN) applied only to Training
-4. **Model Training** on resampled training data
-5. **Threshold Tuning** on validation data
-6. **Final Evaluation** on held-out test data
-7. **Explainability & Drift Analysis** using SHAP and statistical tests
 
 ---
 
