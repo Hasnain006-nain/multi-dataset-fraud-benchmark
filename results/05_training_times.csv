@@ -1,0 +1,37 @@
+dataset,model,model_display,train_source,train_time_s,status
+D1_Kaggle_CC,LR_balanced,LogReg balanced,original,2.8297763609998583,ok
+D1_Kaggle_CC,RF,Random Forest,original,29.33961176699995,ok
+D1_Kaggle_CC,BRF,Balanced RF,original,3.9637573449999763,ok
+D1_Kaggle_CC,EasyEnsemble,EasyEnsemble,original,2.349357285999986,ok
+D1_Kaggle_CC,XGB,XGBoost,original,5.521025364000025,ok
+D1_Kaggle_CC,XGB_spw,XGBoost scale_pos_weight,original,1.9249450879999586,ok
+D1_Kaggle_CC,XGB_SMOTE,XGBoost + SMOTE,SMOTE,3.6898395109999456,ok
+D1_Kaggle_CC,XGB_ADASYN,XGBoost + ADASYN,ADASYN,3.3664368460001697,ok
+D1_Kaggle_CC,LightGBM,LightGBM balanced,original,6.722721395999997,ok
+D1_Kaggle_CC,CatBoost,CatBoost balanced,original,6.4004924999999275,ok
+D2_Online_Fraud,LR_balanced,LogReg balanced,original,19.495250306000116,ok
+D2_Online_Fraud,RF,Random Forest,original,20.576414560000103,ok
+D2_Online_Fraud,BRF,Balanced RF,original,4.640182923999873,ok
+D2_Online_Fraud,EasyEnsemble,EasyEnsemble,original,2.2530869549998442,ok
+D2_Online_Fraud,XGB,XGBoost,original,1.6140400039998894,ok
+D2_Online_Fraud,XGB_spw,XGBoost scale_pos_weight,original,1.6135058039999421,ok
+D2_Online_Fraud,XGB_SMOTE,XGBoost + SMOTE,SMOTE,12.157790365999972,ok
+D2_Online_Fraud,XGB_ADASYN,XGBoost + ADASYN,ADASYN,11.647472691000075,ok
+D2_Online_Fraud,LightGBM,LightGBM balanced,original,4.212956938999923,ok
+D2_Online_Fraud,CatBoost,CatBoost balanced,original,7.211784708999858,ok
+D3_PaySim,LR_balanced,LogReg balanced,original,1.469062441999995,ok
+D3_PaySim,RF,Random Forest,original,6.333559462000039,ok
+D3_PaySim,BRF,Balanced RF,original,3.1624794859999383,ok
+D3_PaySim,EasyEnsemble,EasyEnsemble,original,2.237591405000103,ok
+D3_PaySim,XGB,XGBoost,original,0.8414513789998637,ok
+D3_PaySim,XGB_spw,XGBoost scale_pos_weight,original,0.7774104919999445,ok
+D3_PaySim,XGB_SMOTE,XGBoost + SMOTE,SMOTE,1.2896957560001283,ok
+D3_PaySim,XGB_ADASYN,XGBoost + ADASYN,ADASYN,1.2470039539998652,ok
+D3_PaySim,LightGBM,LightGBM balanced,original,2.1637140410000484,ok
+D3_PaySim,CatBoost,CatBoost balanced,original,4.29388433500003,ok
+D1_Kaggle_CC,MLP_Focal,MLP + Focal Loss,original,44.96551547900003,ok
+D1_Kaggle_CC,MLP_Focal_SMOTE,MLP + Focal + SMOTE,SMOTE,67.66740434000008,ok
+D2_Online_Fraud,MLP_Focal,MLP + Focal Loss,original,14.122481520000065,ok
+D2_Online_Fraud,MLP_Focal_SMOTE,MLP + Focal + SMOTE,SMOTE,28.527217569999948,ok
+D3_PaySim,MLP_Focal,MLP + Focal Loss,original,40.661931135999794,ok
+D3_PaySim,MLP_Focal_SMOTE,MLP + Focal + SMOTE,SMOTE,51.540145748000214,ok

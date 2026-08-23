@@ -1,0 +1,4 @@
+dataset,source_file,original_rows,rows_used,fraud_cases,fraud_rate_pct,fit_rows,validation_rows,test_rows,test_fraud_cases,features_after_preprocessing,time_column_for_drift,dropped_columns
+D1_Kaggle_CC,creditcard.csv,283726,283726,473,0.1667101358352777,181584,45396,56746,95,30,Time,
+D2_Online_Fraud,fraudTest.csv,555719,300000,2145,0.715,192000,48000,60000,429,769,unix_time,"Unnamed: 0, cc_num, city, dob, first, job, last, street, trans_num, zip"
+D3_PaySim,PS.csv,5840045,200000,4497,2.2485,128000,32000,40000,899,11,step,"isFlaggedFraud, nameDest, nameOrig"

@@ -1,0 +1,2 @@
+run_id,data_dir,output_dir,ram_gb,gpu_name,python_version,xgboost_version,lightgbm_version,run_deep_mlp,run_smote_tomek,bootstrap_rounds
+20260814_134324,/content/drive/MyDrive/Credit-Card-new1/Datasets/Datasets/Datasets,/content/drive/MyDrive/Downloads/Credit/Fraud_Detection_Q1_Publication_Ready,83.47,NVIDIA A100-SXM4-40GB,3.12.13,3.3.0,4.6.0,True,False,300

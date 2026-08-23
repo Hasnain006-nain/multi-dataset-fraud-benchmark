@@ -1,0 +1,13 @@
+dataset,resampler,cls,count
+D1_Kaggle_CC,SMOTE,non_fraud,181282
+D1_Kaggle_CC,SMOTE,fraud,181282
+D1_Kaggle_CC,ADASYN,non_fraud,181282
+D1_Kaggle_CC,ADASYN,fraud,181249
+D2_Online_Fraud,SMOTE,non_fraud,190627
+D2_Online_Fraud,SMOTE,fraud,190627
+D2_Online_Fraud,ADASYN,non_fraud,190627
+D2_Online_Fraud,ADASYN,fraud,190913
+D3_PaySim,SMOTE,non_fraud,125122
+D3_PaySim,SMOTE,fraud,125122
+D3_PaySim,ADASYN,non_fraud,125122
+D3_PaySim,ADASYN,fraud,125313

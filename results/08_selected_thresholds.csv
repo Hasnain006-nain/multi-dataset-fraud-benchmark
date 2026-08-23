@@ -1,0 +1,37 @@
+dataset,model,model_display,selected_threshold
+D1_Kaggle_CC,LR_balanced,LogReg balanced,0.9
+D1_Kaggle_CC,RF,Random Forest,0.04
+D1_Kaggle_CC,BRF,Balanced RF,0.75
+D1_Kaggle_CC,EasyEnsemble,EasyEnsemble,0.62
+D1_Kaggle_CC,XGB,XGBoost,0.05
+D1_Kaggle_CC,XGB_spw,XGBoost scale_pos_weight,0.06
+D1_Kaggle_CC,XGB_SMOTE,XGBoost + SMOTE,0.74
+D1_Kaggle_CC,XGB_ADASYN,XGBoost + ADASYN,0.33
+D1_Kaggle_CC,LightGBM,LightGBM balanced,0.02
+D1_Kaggle_CC,CatBoost,CatBoost balanced,0.12
+D1_Kaggle_CC,MLP_Focal,MLP + Focal Loss,0.2
+D1_Kaggle_CC,MLP_Focal_SMOTE,MLP + Focal + SMOTE,0.53
+D2_Online_Fraud,LR_balanced,LogReg balanced,0.59
+D2_Online_Fraud,RF,Random Forest,0.02
+D2_Online_Fraud,BRF,Balanced RF,0.42
+D2_Online_Fraud,EasyEnsemble,EasyEnsemble,0.48
+D2_Online_Fraud,XGB,XGBoost,0.03
+D2_Online_Fraud,XGB_spw,XGBoost scale_pos_weight,0.44
+D2_Online_Fraud,XGB_SMOTE,XGBoost + SMOTE,0.07
+D2_Online_Fraud,XGB_ADASYN,XGBoost + ADASYN,0.1
+D2_Online_Fraud,LightGBM,LightGBM balanced,0.03
+D2_Online_Fraud,CatBoost,CatBoost balanced,0.5
+D2_Online_Fraud,MLP_Focal,MLP + Focal Loss,0.15
+D2_Online_Fraud,MLP_Focal_SMOTE,MLP + Focal + SMOTE,0.02
+D3_PaySim,LR_balanced,LogReg balanced,0.34
+D3_PaySim,RF,Random Forest,0.1
+D3_PaySim,BRF,Balanced RF,0.42
+D3_PaySim,EasyEnsemble,EasyEnsemble,0.48
+D3_PaySim,XGB,XGBoost,0.09
+D3_PaySim,XGB_spw,XGBoost scale_pos_weight,0.41
+D3_PaySim,XGB_SMOTE,XGBoost + SMOTE,0.48
+D3_PaySim,XGB_ADASYN,XGBoost + ADASYN,0.74
+D3_PaySim,LightGBM,LightGBM balanced,0.1
+D3_PaySim,CatBoost,CatBoost balanced,0.62
+D3_PaySim,MLP_Focal,MLP + Focal Loss,0.14
+D3_PaySim,MLP_Focal_SMOTE,MLP + Focal + SMOTE,0.42
