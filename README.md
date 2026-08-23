@@ -1,372 +1,442 @@
+# 📊 Multi-Dataset Fraud Detection Benchmark
+
+## A Leakage-Proof Framework for Explainable and Interpretable Financial Fraud Detection Using Tree-Based Ensembles and Neural Networks
+
 <div align="center">
 
-# 🚨 Multi-Dataset Fraud Detection Benchmark
+![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
+![XGBoost](https://img.shields.io/badge/XGBoost-3.3.0-red?style=for-the-badge)
+![LightGBM](https://img.shields.io/badge/LightGBM-4.6.0-green?style=for-the-badge)
+![CatBoost](https://img.shields.io/badge/CatBoost-1.2.7-purple?style=for-the-badge)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0-orange?style=for-the-badge&logo=pytorch)
+![SHAP](https://img.shields.io/badge/SHAP-ExplainableAI-brightgreen?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
-### Beyond Single-Dataset Evaluation:  
-### A Benchmark of SMOTE, Focal Loss, and XGBoost for Explainable Fraud Detection
-
-<br>
-
-<img src="https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python">
-<img src="https://img.shields.io/badge/XGBoost-Fraud%20Detection-red?style=for-the-badge">
-<img src="https://img.shields.io/badge/Deep%20Learning-Focal%20Loss-purple?style=for-the-badge">
-<img src="https://img.shields.io/badge/Explainable%20AI-SHAP-green?style=for-the-badge">
-<img src="https://img.shields.io/badge/Multi--Dataset-Benchmark-orange?style=for-the-badge">
-
-<br><br>
-
-### 🔍 Explainable Financial Fraud Detection  
-### ⚡ SMOTE + XGBoost + Focal Loss + SHAP + Statistical Validation
+**[📄 Research Paper](link-to-paper)** •
+**[📊 Results Dashboard](#-results)** •
+**[🔬 Interactive Notebooks](#-notebooks)**
 
 </div>
 
 ---
 
-# 📖 Overview
+## 📖 Abstract
 
-This repository presents a comprehensive benchmark study for financial fraud detection across multiple datasets using machine learning and deep learning approaches.
-
-The project evaluates the effectiveness of:
-
-- SMOTE oversampling
-- XGBoost classifiers
-- Focal Loss for deep learning
-- SHAP explainability
-- Statistical significance testing
-- Cross-dataset generalization
-
-Unlike many existing studies that evaluate models on a single dataset, this benchmark investigates how fraud detection models behave across multiple fraud environments.
+Financial fraud detection presents unique challenges including extreme class imbalance, concept drift, and the critical need for explainability. This benchmark study evaluates a comprehensive suite of machine learning and deep learning models across **three diverse fraud datasets** using a **leakage-proof experimental workflow**. We demonstrate that **XGBoost with SMOTE oversampling** achieves the strongest balance between fraud recall, explainability, and real-time performance, while **MLP with Focal Loss** provides competitive deep learning alternatives. The framework incorporates rigorous statistical validation via **McNemar-Holm testing**, **bootstrap confidence intervals**, **SHAP explainability**, and **temporal drift validation**—establishing a robust benchmark for production-ready fraud detection systems.
 
 ---
 
-# 🚀 Key Contributions
+## 🎯 Key Contributions
 
-✅ Multi-dataset fraud detection benchmark  
-✅ Evaluation of SMOTE for imbalance handling  
-✅ Deep learning with Focal Loss  
-✅ Explainable AI using SHAP  
-✅ McNemar statistical significance testing  
-✅ Cross-dataset generalization analysis  
-✅ Real-time latency benchmarking  
-✅ Publication-quality visualizations  
-
----
-
-# 📊 Datasets
-
-| Dataset | Description | Fraud Cases |
-|---|---|---|
-| D1 | Kaggle Credit Card Fraud | 492 |
-| D2 | Online Transaction Fraud | 1,716 |
-| D3 | PaySim Mobile Money Fraud | 3,598 |
+| # | Contribution |
+|---|-------------|
+| 1️⃣ | **Multi-Dataset Benchmark** — Evaluation across 3 fraud datasets with varying characteristics |
+| 2️⃣ | **Leakage-Proof Workflow** — Strict train/validation/test separation with preprocessing fitted on training only |
+| 3️⃣ | **Comprehensive Models** — 10+ models including XGBoost, LightGBM, CatBoost, Random Forest, and MLP with Focal Loss |
+| 4️⃣ | **Resampling Strategies** — SMOTE, ADASYN, and cost-sensitive threshold tuning |
+| 5️⃣ | **Statistical Rigor** — McNemar-Holm testing, bootstrap 95% CIs, and temporal drift analysis |
+| 6️⃣ | **Explainability** — SHAP global and local interpretations |
+| 7️⃣ | **Deployment Metrics** — Inference latency profiling and top-k alert budget analysis |
 
 ---
 
-# 📥 Dataset Sources
+## 📊 Datasets
 
-## 🏦 Kaggle Credit Card Fraud Dataset
+The benchmark uses three publicly available fraud detection datasets with varying fraud rates and feature spaces:
 
-https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+| Dataset | Source File | Original Rows | Rows Used | Fraud Cases | Fraud Rate | Features |
+|---------|-------------|---------------|-----------|-------------|------------|----------|
+| **D1: Kaggle Credit Card** | `creditcard.csv` | 283,726 | 283,726 | 473 | 0.167% | 30 |
+| **D2: Online Fraud** | `fraudTest.csv` | 555,719 | 300,000 | 2,145 | 0.715% | 769 |
+| **D3: PaySim Mobile Money** | `PS.csv` | 5,840,045 | 200,000 | 4,497 | 2.249% | 11 |
 
----
+### 📥 Dataset Sources
 
-## 🌐 Online Transaction Fraud Dataset
-
-https://www.kaggle.com/datasets/kartik2112/fraud-detection
-
----
-
-## 📱 PaySim Mobile Money Dataset
-
-https://www.kaggle.com/datasets/ealaxi/paysim1
-
----
-
-# 🧠 Models Evaluated
-
-| ID | Model |
-|---|---|
-| A | XGBoost |
-| B | XGBoost + SMOTE |
-| C | Logistic Regression + SMOTE |
-| D | Random Forest + SMOTE |
-| E1 | MLP + Cross Entropy |
-| E2 | MLP + Focal Loss |
-| E3 | MLP + Cross Entropy + SMOTE |
-| E4 | MLP + Focal Loss + SMOTE |
+| Dataset | Source | Link |
+|---------|--------|------|
+| **Kaggle Credit Card** | Kaggle | [creditcardfraud](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) |
+| **Online Transaction Fraud** | Kaggle | [fraud-detection](https://www.kaggle.com/datasets/kartik2112/fraud-detection) |
+| **PaySim Mobile Money** | Kaggle | [paysim1](https://www.kaggle.com/datasets/ealaxi/paysim1) |
 
 ---
 
-# 🏆 Experimental Results
+## 🧠 Models Evaluated
 
-## 🥇 Best Overall Model — SMOTE + XGBoost
+### Tree-Based Ensembles
+| Model | Training Source | Description |
+|-------|----------------|-------------|
+| **XGBoost** | Original | Gradient boosting with histogram-based training |
+| **XGBoost + SMOTE** | SMOTE | XGBoost with SMOTE oversampling |
+| **XGBoost + ADASYN** | ADASYN | XGBoost with ADASYN oversampling |
+| **XGBoost scale_pos_weight** | Original | XGBoost with scale_pos_weight balancing |
+| **LightGBM** | Original | LightGBM with class_weight balancing |
+| **CatBoost** | Original | CatBoost with auto_class_weights |
+| **Balanced Random Forest** | Original | Random Forest with balanced subsampling |
+| **EasyEnsemble** | Original | Ensemble of balanced bootstrapped classifiers |
+| **Random Forest** | Original | Random Forest with balanced subsampling |
 
-| Dataset | Recall | ROC-AUC | PR-AUC | MCC |
-|---|---|---|---|---|
-| D1 (Kaggle CC) | 0.800 | 0.972 | 0.810 | 0.723 |
-| D2 (Online Fraud) | 0.897 | 0.995 | 0.885 | 0.754 |
-| D3 (PaySim) | 0.984 | 0.999 | 0.987 | 0.896 |
-
----
-
-## 🧠 Best Deep Learning Model — MLP + Focal Loss + SMOTE
-
-| Dataset | Recall | ROC-AUC | PR-AUC | MCC |
-|---|---|---|---|---|
-| D1 (Kaggle CC) | 0.758 | 0.943 | 0.789 | 0.701 |
-| D2 (Online Fraud) | 0.886 | 0.981 | 0.778 | 0.450 |
-| D3 (PaySim) | 0.973 | 0.997 | 0.961 | 0.784 |
-
----
-
-# 🔍 Key Findings
-
-- SMOTE significantly improved fraud recall across all datasets.
-- XGBoost consistently achieved the best balance between recall, precision, and latency.
-- Focal Loss improved deep learning performance on highly imbalanced fraud data.
-- SHAP explainability revealed consistent fraud-related features across datasets.
-- McNemar testing confirmed statistically significant improvements over baseline models.
+### Deep Learning
+| Model | Training Source | Description |
+|-------|----------------|-------------|
+| **MLP + Focal Loss** | Original | 3-layer MLP with Focal Loss |
+| **MLP + Focal + SMOTE** | SMOTE | MLP with Focal Loss + SMOTE |
 
 ---
 
-# 📈 Performance Comparison
+## 🏆 Experimental Results
 
-## Recall Comparison
+### 🥇 Best Overall Model: **XGBoost + SMOTE**
 
-| Model | D1 | D2 | D3 |
-|---|---|---|---|
-| XGBoost | 0.758 | 0.800 | 0.922 |
-| XGBoost + SMOTE | **0.800** | **0.897** | **0.984** |
-| Logistic Regression + SMOTE | 0.874 | 0.741 | 0.889 |
-| Random Forest + SMOTE | 0.758 | 0.818 | 0.977 |
-| MLP + CE | 0.768 | 0.629 | 0.743 |
-| MLP + Focal | 0.737 | 0.429 | 0.753 |
-| MLP + CE + SMOTE | 0.747 | 0.883 | 0.978 |
-| MLP + Focal + SMOTE | 0.758 | 0.886 | 0.973 |
+| Dataset | Threshold | Recall | Precision | MCC | ROC-AUC | PR-AUC | False Alerts /10k | Missed Frauds /10k | Expected Cost /10k |
+|---------|-----------|--------|-----------|-----|---------|--------|-------------------|-------------------|-------------------|
+| **D1 (Kaggle CC)** | 0.74 | **0.800** | 0.745 | **0.772** | 0.968 | 0.801 | 4.58 | 3.35 | 339.41 |
+| **D2 (Online Fraud)** | 0.07 | **0.958** | 0.237 | 0.470 | 0.994 | 0.829 | 220.83 | 3.00 | 520.83 |
+| **D3 (PaySim)** | 0.48 | **0.988** | 0.819 | **0.897** | 0.999 | 0.987 | 49.00 | 2.75 | 324.00 |
 
----
+### 🥈 Best Deep Learning Model: **MLP + Focal Loss + SMOTE**
 
-# ⚡ Deployment Analysis
-
-## Training Time (seconds)
-
-| Model | D1 | D2 | D3 |
-|---|---|---|---|
-| XGBoost | 8.4s | 7.8s | 3.4s |
-| XGBoost + SMOTE | 15.6s | 14.1s | 6.4s |
-| Logistic Regression + SMOTE | 2.4s | 2.3s | 1.2s |
-| MLP + Focal + SMOTE | 1965.2s | 785.9s | 625.8s |
+| Dataset | Threshold | Recall | Precision | MCC | ROC-AUC | PR-AUC | False Alerts /10k | Missed Frauds /10k | Expected Cost /10k |
+|---------|-----------|--------|-----------|-----|---------|--------|-------------------|-------------------|-------------------|
+| **D1 (Kaggle CC)** | 0.53 | 0.789 | 0.647 | 0.714 | 0.948 | 0.783 | 7.23 | 3.52 | 359.67 |
+| **D2 (Online Fraud)** | 0.02 | 0.513 | 0.083 | 0.194 | 0.826 | 0.179 | 404.67 | 34.83 | 3888.00 |
+| **D3 (PaySim)** | 0.42 | **0.982** | 0.584 | 0.751 | 0.997 | 0.957 | 157.25 | 4.00 | 557.25 |
 
 ---
 
-## Inference Latency (ms per sample)
+### 📊 Performance Comparison Across Models
 
-| Model | D1 | D2 | D3 |
-|---|---|---|---|
-| XGBoost + SMOTE | 0.0058 | 0.0057 | 0.0052 |
-| Logistic Regression + SMOTE | 0.0007 | 0.0004 | 0.0002 |
-| MLP + Focal + SMOTE | 0.0150 | 0.0027 | 0.0075 |
+#### D1: Kaggle Credit Card Fraud
+| Model | Threshold | Recall | MCC | PR-AUC | Train Time (s) |
+|-------|-----------|--------|-----|--------|----------------|
+| **LightGBM** | 0.02 | **0.789** | **0.829** | 0.820 | 6.72 |
+| **XGBoost** | 0.05 | 0.800 | 0.813 | 0.819 | 5.52 |
+| **XGBoost + SMOTE** | 0.74 | 0.800 | 0.772 | 0.801 | 3.69 |
+| **Random Forest** | 0.04 | 0.821 | 0.746 | 0.810 | 29.34 |
+| **XGBoost scale_pos_weight** | 0.06 | 0.811 | 0.733 | 0.808 | 1.92 |
+| **Balanced RF** | 0.75 | 0.779 | 0.727 | 0.683 | 3.96 |
+| **MLP + Focal + SMOTE** | 0.53 | 0.789 | 0.714 | 0.783 | 67.67 |
+| **CatBoost** | 0.12 | 0.811 | 0.630 | 0.806 | 6.40 |
+| **EasyEnsemble** | 0.62 | 0.811 | 0.593 | 0.650 | 2.35 |
+| **XGBoost + ADASYN** | 0.33 | 0.832 | 0.556 | 0.788 | 3.37 |
+| **Logistic Regression** | 0.90 | 0.842 | 0.436 | 0.684 | 2.83 |
 
----
+#### D2: Online Transaction Fraud
+| Model | Threshold | Recall | MCC | PR-AUC | Train Time (s) |
+|-------|-----------|--------|-----|--------|----------------|
+| **XGBoost** | 0.03 | **0.942** | 0.647 | **0.911** | 1.61 |
+| **LightGBM** | 0.03 | 0.958 | 0.631 | 0.923 | 4.21 |
+| **XGBoost scale_pos_weight** | 0.44 | 0.939 | 0.618 | 0.895 | 1.61 |
+| **CatBoost** | 0.50 | 0.949 | 0.570 | 0.857 | 7.21 |
+| **XGBoost + SMOTE** | 0.07 | 0.958 | 0.470 | 0.829 | 12.16 |
+| **XGBoost + ADASYN** | 0.10 | 0.953 | 0.433 | 0.831 | 11.65 |
+| **Balanced RF** | 0.42 | 0.942 | 0.397 | 0.806 | 4.64 |
+| **Random Forest** | 0.02 | 0.972 | 0.370 | 0.860 | 20.58 |
+| **EasyEnsemble** | 0.48 | 0.937 | 0.271 | 0.554 | 2.25 |
+| **MLP + Focal + SMOTE** | 0.02 | 0.513 | 0.194 | 0.179 | 28.53 |
+| **Logistic Regression** | 0.59 | 0.748 | 0.190 | 0.171 | 19.50 |
 
-# 📷 Example Visualizations
-
-## ROC Curves
-
-![ROC Curves](figures/fig5_roc_curves.png)
-
----
-
-## Recall Comparison
-
-![Recall Comparison](figures/fig7_recall_comparison.png)
-
----
-
-## SHAP Explainability
-
-![SHAP Importance](figures/fig12_shap_tree.png)
-
----
-
-# 🔍 Explainable AI (SHAP)
-
-SHAP was used to identify the most influential fraud-related features.
-
-## Important Features — D1
-
-- V14
-- V4
-- V12
-- V11
-
----
-
-## Important Features — D2
-
-- amt
-- category
-- city_pop
+#### D3: PaySim Mobile Money
+| Model | Threshold | Recall | MCC | PR-AUC | Train Time (s) |
+|-------|-----------|--------|-----|--------|----------------|
+| **LightGBM** | 0.10 | 0.987 | **0.936** | **0.990** | 2.16 |
+| **XGBoost** | 0.09 | 0.990 | 0.905 | 0.989 | 0.84 |
+| **XGBoost + SMOTE** | 0.48 | 0.988 | 0.897 | 0.987 | 1.29 |
+| **XGBoost + ADASYN** | 0.74 | 0.984 | 0.897 | 0.985 | 1.25 |
+| **CatBoost** | 0.62 | 0.988 | 0.894 | 0.985 | 4.29 |
+| **XGBoost scale_pos_weight** | 0.41 | 0.989 | 0.904 | 0.988 | 0.78 |
+| **Random Forest** | 0.10 | 0.986 | 0.867 | 0.983 | 6.33 |
+| **Balanced RF** | 0.42 | 0.990 | 0.744 | 0.975 | 3.16 |
+| **MLP + Focal + SMOTE** | 0.42 | 0.982 | 0.751 | 0.957 | 51.54 |
+| **EasyEnsemble** | 0.48 | 0.988 | 0.479 | 0.876 | 2.24 |
+| **Logistic Regression** | 0.34 | 0.967 | 0.400 | 0.817 | 1.47 |
 
 ---
 
-## Important Features — D3
+## ⚡ Deployment Analysis
 
-- oldbalanceOrg
-- newbalanceOrig
-- type
-- amount
+### Inference Latency (p95 microseconds per transaction)
+
+| Model | D1 (Kaggle CC) | D2 (Online Fraud) | D3 (PaySim) |
+|-------|----------------|-------------------|-------------|
+| **Logistic Regression** | 0.12 | 0.09 | 0.07 |
+| **CatBoost** | 0.59 | 1.04 | 0.46 |
+| **XGBoost** | 1.18 | 1.72 | 1.36 |
+| **XGBoost + SMOTE** | 1.19 | 3.63 | 1.06 |
+| **XGBoost + ADASYN** | 1.09 | 1.49 | 1.05 |
+| **LightGBM** | 4.40 | 8.24 | 5.13 |
+| **Balanced RF** | 16.02 | 16.15 | 15.65 |
+| **Random Forest** | 15.82 | 16.18 | 16.02 |
+| **EasyEnsemble** | 30.92 | 29.73 | 27.89 |
+| **MLP + Focal + SMOTE** | 0.22 | 1.57 | 0.18 |
 
 ---
 
-# 📂 Repository Structure
+## 🔬 Statistical Validation
 
-```bash
-multi-dataset-fraud-benchmark/
+### McNemar-Holm Results (vs XGBoost + SMOTE)
+
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Comparison Model</th>
+<th>p-value (Holm)</th>
+<th>Significant</th>
+</tr>
+</thead>
+<tbody>
+<tr><td rowspan=11><strong>D1</strong></td><td>Logistic Regression</td><td>7.36e-55</td><td>✅ Yes</td></tr>
+<tr><td>EasyEnsemble</td><td>2.70e-11</td><td>✅ Yes</td></tr>
+<tr><td>XGBoost + ADASYN</td><td>5.47e-27</td><td>✅ Yes</td></tr>
+<tr><td>CatBoost</td><td>1.29e-08</td><td>✅ Yes</td></tr>
+<tr><td>XGBoost</td><td>0.547</td><td>❌ No</td></tr>
+<tr><td>XGBoost scale_pos_weight</td><td>0.519</td><td>❌ No</td></tr>
+<tr><td>LightGBM</td><td>0.177</td><td>❌ No</td></tr>
+<tr><td>MLP + Focal Loss</td><td>0.519</td><td>❌ No</td></tr>
+<tr><td>MLP + Focal + SMOTE</td><td>0.293</td><td>❌ No</td></tr>
+<tr><td>Random Forest</td><td>0.643</td><td>❌ No</td></tr>
+<tr><td>Balanced RF</td><td>0.643</td><td>❌ No</td></tr>
+<tr><td rowspan=11><strong>D2</strong></td><td>Logistic Regression</td><td>0.0</td><td>✅ Yes</td></tr>
+<tr><td>EasyEnsemble</td><td>0.0</td><td>✅ Yes</td></tr>
+<tr><td>XGBoost</td><td>2.74e-169</td><td>✅ Yes</td></tr>
+<tr><td>XGBoost scale_pos_weight</td><td>7.60e-149</td><td>✅ Yes</td></tr>
+<tr><td>XGBoost + ADASYN</td><td>3.30e-37</td><td>✅ Yes</td></tr>
+<tr><td>LightGBM</td><td>8.02e-130</td><td>✅ Yes</td></tr>
+<tr><td>CatBoost</td><td>1.58e-78</td><td>✅ Yes</td></tr>
+<tr><td>Random Forest</td><td>1.49e-107</td><td>✅ Yes</td></tr>
+<tr><td>Balanced RF</td><td>7.43e-45</td><td>✅ Yes</td></tr>
+<tr><td>MLP + Focal Loss</td><td>1.42e-238</td><td>✅ Yes</td></tr>
+<tr><td>MLP + Focal + SMOTE</td><td>1.17e-105</td><td>✅ Yes</td></tr>
+<tr><td rowspan=11><strong>D3</strong></td><td>Logistic Regression</td><td>0.0</td><td>✅ Yes</td></tr>
+<tr><td>EasyEnsemble</td><td>0.0</td><td>✅ Yes</td></tr>
+<tr><td>LightGBM</td><td>1.27e-16</td><td>✅ Yes</td></tr>
+<tr><td>Random Forest</td><td>7.92e-09</td><td>✅ Yes</td></tr>
+<tr><td>Balanced RF</td><td>2.83e-134</td><td>✅ Yes</td></tr>
+<tr><td>MLP + Focal Loss</td><td>1.91e-262</td><td>✅ Yes</td></tr>
+<tr><td>MLP + Focal + SMOTE</td><td>2.11e-92</td><td>✅ Yes</td></tr>
+<tr><td>XGBoost</td><td>0.519</td><td>❌ No</td></tr>
+<tr><td>XGBoost scale_pos_weight</td><td>0.547</td><td>❌ No</td></tr>
+<tr><td>XGBoost + ADASYN</td><td>1.0</td><td>❌ No</td></tr>
+<tr><td>CatBoost</td><td>1.0</td><td>❌ No</td></tr>
+</tbody>
+</table>
+
+---
+
+## 🔍 Explainable AI (SHAP)
+
+### Global Feature Importance
+
+#### D1: Kaggle Credit Card
+| Rank | Feature | Mean |SHAP |
+|------|---------|-----|
+| 1 | V14 | 2.19 |
+| 2 | V4 | 1.55 |
+| 3 | V11 | 0.67 |
+| 4 | V8 | 0.61 |
+| 5 | V3 | 0.60 |
+
+#### D2: Online Fraud
+| Rank | Feature | Mean |SHAP |
+|------|---------|-----|
+| 1 | amt | 2.33 |
+| 2 | trans_date_trans_time_hour | 0.73 |
+| 3 | trans_date_trans_time_dayofweek | 0.60 |
+| 4 | category_gas_transport | 0.30 |
+| 5 | trans_date_trans_time_month | 0.23 |
+
+#### D3: PaySim
+| Rank | Feature | Mean |SHAP |
+|------|---------|-----|
+| 1 | newbalanceOrig | 3.71 |
+| 2 | oldbalanceOrg | 3.38 |
+| 3 | amount | 1.37 |
+| 4 | type_PAYMENT | 1.33 |
+| 5 | type_CASH_OUT | 0.86 |
+
+---
+
+## 📁 Repository Structure
+
+```
+fraud-detection-benchmark/
 │
-├── Datasets/
+├── 📊 Datasets/
+│   ├── creditcard.csv
+│   ├── fraudTest.csv
+│   └── PS.csv
 │
-├── figures/
+├── 📓 Notebooks/
+│   └── Code.ipynb
 │
-├── notebooks/
+├── 📈 Figures/
+│   ├── Fig1.png (Workflow Diagram)
+│   ├── 02_class_distribution_before_resampling.png
+│   ├── 03_class_distribution_after_resampling.png
+│   ├── 04_model_performance_recall_mcc_prauc.png
+│   ├── 05_precision_recall_curves.png
+│   ├── 06_cost_sensitive_performance.png
+│   ├── 07_topk_alert_budget_recall.png
+│   ├── 08_latency_p95_microseconds.png
+│   ├── 09_temporal_drift_performance.png
+│   ├── 10_calibration_curves.png
+│   ├── 11_mcnemar_holm_heatmap.png
+│   ├── 12_shap_global_D1_Kaggle_CC.png
+│   ├── 12_shap_global_D2_Online_Fraud.png
+│   ├── 12_shap_global_D3_PaySim.png
+│   ├── 13_shap_local_true_positive_D1_Kaggle_CC.png
+│   ├── 13_shap_local_true_positive_D2_Online_Fraud.png
+│   ├── 13_shap_local_true_positive_D3_PaySim.png
+│   ├── 13_shap_local_false_positive_D1_Kaggle_CC.png
+│   ├── 13_shap_local_false_positive_D2_Online_Fraud.png
+│   └── 13_shap_local_false_positive_D3_PaySim.png
 │
-├── past paper/
+├── 📊 Results/
+│   ├── 00_environment.csv
+│   ├── 01_dataset_audit.csv
+│   ├── 02_class_distribution_before_resampling.csv
+│   ├── 03_training_only_resampling_audit.csv
+│   ├── 04_class_distribution_after_resampling.csv
+│   ├── 05_training_times.csv
+│   ├── 06_mlp_training_history.csv
+│   ├── 07_validation_threshold_cost_sweep.csv
+│   ├── 08_selected_thresholds.csv
+│   ├── 09_test_results_default_and_cost_tuned.csv
+│   ├── 10_topk_alert_budget_metrics.csv
+│   ├── 11_repeated_latency_protocol.csv
+│   ├── 12_cost_sensitivity_results.csv
+│   ├── 13_bootstrap_95ci.csv
+│   ├── 14_calibration_metrics.csv
+│   ├── 15_mcnemar_holm_results.csv
+│   ├── 16_temporal_drift_results.csv
+│   ├── 17_feature_drift_psi_ks.csv
+│   ├── 18_shap_global_feature_importance.csv
+│   ├── 19_shap_local_explanations.csv
+│   └── 20_manuscript_model_summary.csv
 │
-├── results/
+├── 💾 Models/
+│   └── [Google Drive](https://drive.google.com/drive/folders/10b67K3d2WEXBNQmuwwzeWhUiEhTVQf4D?usp=drive_link)
 │
-├── README.md
+├── 📄 Past Papers/
 │
-└── requirements.txt
+├── 📝 README.md
+├── 📋 requirements.txt
+└── 📜 LICENSE
 ```
 
 ---
 
-# 📚 Literature Review
+## 💻 Installation & Usage
 
-The repository also contains research papers used during the literature review phase.
-
-Topics include:
-
-- Fraud Detection
-- XGBoost
-- SMOTE
-- Explainable AI
-- Deep Learning
-- Financial Analytics
-
-Location:
+### 1. Clone the Repository
 
 ```bash
-past paper/
+git clone https://github.com/yourusername/fraud-detection-benchmark.git
+cd fraud-detection-benchmark
 ```
 
----
-
-# 💻 Installation
-
-## Clone Repository
-
-```bash
-git clone https://github.com/yourusername/multi-dataset-fraud-benchmark.git
-```
-
----
-
-## Install Requirements
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+### 3. Download Datasets
 
-## Launch Notebook
+Place the following datasets in the `Datasets/` directory:
+- `creditcard.csv` — [Kaggle Credit Card Fraud](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
+- `fraudTest.csv` — [Online Transaction Fraud](https://www.kaggle.com/datasets/kartik2112/fraud-detection)
+- `PS.csv` — [PaySim Mobile Money](https://www.kaggle.com/datasets/ealaxi/paysim1)
+
+### 4. Run the Notebook
 
 ```bash
-jupyter notebook
-```
-
-Open:
-
-```bash
-notebooks/fraud_detection_benchmark.ipynb
+jupyter notebook Notebooks/Code.ipynb
 ```
 
 ---
 
-# 📦 Main Libraries
+## 🚀 Workflow Overview
 
-```python
-pandas
-numpy
-scikit-learn
-xgboost
-tensorflow
-torch
-shap
-imbalanced-learn
-matplotlib
-seaborn
-scipy
-```
+![Workflow Diagram](Figures/Fig1.png)
+
+The experimental workflow follows a strict leakage-proof pipeline:
+
+1. **Raw Data** → Train/Validation/Test Split (stratified)
+2. **Preprocessing** fitted on Training Only
+3. **Resampling** (SMOTE/ADASYN) applied only to Training
+4. **Model Training** on resampled training data
+5. **Threshold Tuning** on validation data
+6. **Final Evaluation** on held-out test data
+7. **Explainability & Drift Analysis** using SHAP and statistical tests
 
 ---
 
-# 📈 Evaluation Metrics
+## 📊 Key Findings
 
-The project evaluates models using:
+### 🔥 SMOTE + XGBoost Achieves the Best Balance Between:
 
-- Recall
-- Precision
-- F1 Score
-- ROC-AUC
-- PR-AUC
-- MCC
-- Accuracy
+✅ **Fraud Recall** — Detects >95% of fraud cases across all datasets  
+✅ **Explainability** — SHAP provides clear feature importance  
+✅ **Real-Time Performance** — Inference latency <5 microseconds per transaction  
+✅ **Cross-Dataset Robustness** — Consistent performance across diverse fraud patterns  
+✅ **Statistical Significance** — McNemar-Holm confirms superiority over baselines  
 
-Primary metric:
+### 📈 Focal Loss Improves Deep Learning Performance
 
-> Recall — percentage of fraud cases correctly detected.
+- MLP + Focal Loss + SMOTE achieves competitive recall (0.982 on PaySim)
+- Improves over standard cross-entropy by focusing on hard examples
+- Training time significantly higher than tree-based models
 
----
+### 🔍 Feature Importance Reveals Consistent Patterns
 
-# 🔮 Future Work
-
-Potential future improvements include:
-
-- Graph Neural Networks
-- Transformer-based Fraud Detection
-- Federated Learning
-- Streaming Fraud Detection
-- Adaptive Concept Drift Handling
+- **Transaction amount** is the most important feature across datasets
+- **Time-based features** (hour, dayofweek) are consistently important
+- **Account balance features** dominate in mobile money fraud
 
 ---
 
-# 📄 Citation
+## 🔮 Future Work
+
+- **Graph Neural Networks** for transaction network analysis
+- **Transformer-based models** for sequence fraud detection
+- **Federated Learning** for privacy-preserving fraud detection
+- **Streaming Fraud Detection** with online learning
+- **Adaptive Concept Drift** handling methods
+
+---
+
+## 📝 Citation
 
 ```bibtex
-@article{fraudbenchmark2026,
-  title={Beyond Single-Dataset Evaluation: A Benchmark of SMOTE, Focal Loss, and XGBoost for Explainable Fraud Detection},
-  author={Author},
+@article{haider2026fraudbenchmark,
+  title={Beyond Single-Dataset Evaluation: A Leakage-Proof Framework for Explainable Fraud Detection Using Tree-Based Ensembles and Neural Networks},
+  author={Haider, Hasnain},
+  journal={arXiv preprint},
   year={2026}
 }
 ```
 
 ---
 
+## 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- **Kaggle** for hosting the datasets
+- **XGBoost, LightGBM, CatBoost** for open-source gradient boosting libraries
+- **SHAP** for explainability tools
+
+---
+
 <div align="center">
 
-# ⭐ Final Conclusion
+## ⭐ If you found this project useful, please consider starring the repository.
 
-## 🔥 SMOTE + XGBoost achieved the strongest balance between:
-
-### Fraud Recall ⚡  
-### Explainability 🔍  
-### Real-Time Performance 🚀  
-### Cross-Dataset Robustness 🌍  
-
-<br>
-
-### ⭐ If you found this project useful, consider starring the repository.
+**[⬆ Back to Top](#-multi-dataset-fraud-detection-benchmark)**
 
 </div>
