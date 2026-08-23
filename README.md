@@ -11,6 +11,7 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0-orange?style=for-the-badge&logo=pytorch)
 ![SHAP](https://img.shields.io/badge/SHAP-ExplainableAI-brightgreen?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?style=for-the-badge&logo=jupyter)
 
 **[📄 Research Paper](link-to-paper)** •
 **[📊 Results Dashboard](#-results)** •
@@ -31,10 +32,6 @@ Financial fraud detection presents unique challenges including extreme class imb
 The experimental workflow follows a strict leakage-proof pipeline:
 
 <div align="center">
-<img src="Figures/Fig1.png" alt="Workflow Diagram" width="900">
-</div>
-
-**Pipeline Steps:**
 
 | Layer | Description |
 |-------|-------------|
@@ -46,6 +43,8 @@ The experimental workflow follows a strict leakage-proof pipeline:
 | **Final Evaluation Layer** | PR-AUC, Recall, Precision, Expected cost per 10k, False alerts per 10k, Top-k alert budget, Bootstrap 95% confidence intervals, McNemar-Holm statistical testing |
 | **Deployment & Trust Layer** | Repeated inference latency profiling, Temporal/concept-drift validation, Calibration analysis, SHAP global explanations, SHAP local audit |
 | **Output** | Validated Explainable Fraud Detection Benchmark |
+
+</div>
 
 ---
 
@@ -203,51 +202,17 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 ### McNemar-Holm Results (vs XGBoost + SMOTE)
 
-<table>
-<thead>
-<tr>
-<th>Dataset</th>
-<th>Comparison Model</th>
-<th>p-value (Holm)</th>
-<th>Significant</th>
-</tr>
-</thead>
-<tbody>
-<tr><td rowspan=11><strong>D1</strong></td><td>Logistic Regression</td><td>7.36e-55</td><td>✅ Yes</td></tr>
-<tr><td>EasyEnsemble</td><td>2.70e-11</td><td>✅ Yes</td></tr>
-<tr><td>XGBoost + ADASYN</td><td>5.47e-27</td><td>✅ Yes</td></tr>
-<tr><td>CatBoost</td><td>1.29e-08</td><td>✅ Yes</td></tr>
-<tr><td>XGBoost</td><td>0.547</td><td>❌ No</td></tr>
-<tr><td>XGBoost scale_pos_weight</td><td>0.519</td><td>❌ No</td></tr>
-<tr><td>LightGBM</td><td>0.177</td><td>❌ No</td></tr>
-<tr><td>MLP + Focal Loss</td><td>0.519</td><td>❌ No</td></tr>
-<tr><td>MLP + Focal + SMOTE</td><td>0.293</td><td>❌ No</td></tr>
-<tr><td>Random Forest</td><td>0.643</td><td>❌ No</td></tr>
-<tr><td>Balanced RF</td><td>0.643</td><td>❌ No</td></tr>
-<tr><td rowspan=11><strong>D2</strong></td><td>Logistic Regression</td><td>0.0</td><td>✅ Yes</td></tr>
-<tr><td>EasyEnsemble</td><td>0.0</td><td>✅ Yes</td></tr>
-<tr><td>XGBoost</td><td>2.74e-169</td><td>✅ Yes</td></tr>
-<tr><td>XGBoost scale_pos_weight</td><td>7.60e-149</td><td>✅ Yes</td></tr>
-<tr><td>XGBoost + ADASYN</td><td>3.30e-37</td><td>✅ Yes</td></tr>
-<tr><td>LightGBM</td><td>8.02e-130</td><td>✅ Yes</td></tr>
-<tr><td>CatBoost</td><td>1.58e-78</td><td>✅ Yes</td></tr>
-<tr><td>Random Forest</td><td>1.49e-107</td><td>✅ Yes</td></tr>
-<tr><td>Balanced RF</td><td>7.43e-45</td><td>✅ Yes</td></tr>
-<tr><td>MLP + Focal Loss</td><td>1.42e-238</td><td>✅ Yes</td></tr>
-<tr><td>MLP + Focal + SMOTE</td><td>1.17e-105</td><td>✅ Yes</td></tr>
-<tr><td rowspan=11><strong>D3</strong></td><td>Logistic Regression</td><td>0.0</td><td>✅ Yes</td></tr>
-<tr><td>EasyEnsemble</td><td>0.0</td><td>✅ Yes</td></tr>
-<tr><td>LightGBM</td><td>1.27e-16</td><td>✅ Yes</td></tr>
-<tr><td>Random Forest</td><td>7.92e-09</td><td>✅ Yes</td></tr>
-<tr><td>Balanced RF</td><td>2.83e-134</td><td>✅ Yes</td></tr>
-<tr><td>MLP + Focal Loss</td><td>1.91e-262</td><td>✅ Yes</td></tr>
-<tr><td>MLP + Focal + SMOTE</td><td>2.11e-92</td><td>✅ Yes</td></tr>
-<tr><td>XGBoost</td><td>0.519</td><td>❌ No</td></tr>
-<tr><td>XGBoost scale_pos_weight</td><td>0.547</td><td>❌ No</td></tr>
-<tr><td>XGBoost + ADASYN</td><td>1.0</td><td>❌ No</td></tr>
-<tr><td>CatBoost</td><td>1.0</td><td>❌ No</td></tr>
-</tbody>
-</table>
+| Dataset | Comparison Model | p-value (Holm) | Significant |
+|---------|------------------|----------------|-------------|
+| **D1** | Logistic Regression | 7.36e-55 | ✅ Yes |
+| **D1** | EasyEnsemble | 2.70e-11 | ✅ Yes |
+| **D1** | XGBoost + ADASYN | 5.47e-27 | ✅ Yes |
+| **D1** | CatBoost | 1.29e-08 | ✅ Yes |
+| **D1** | XGBoost, XGBoost scale_pos_weight, LightGBM, MLP + Focal Loss, MLP + Focal + SMOTE, Random Forest, Balanced RF | >0.05 | ❌ No |
+| **D2** | All models except XGBoost, XGBoost scale_pos_weight | <0.001 | ✅ Yes |
+| **D2** | XGBoost, XGBoost scale_pos_weight | <0.001 | ✅ Yes |
+| **D3** | Logistic Regression, EasyEnsemble, LightGBM, Random Forest, Balanced RF, MLP + Focal Loss, MLP + Focal + SMOTE | <0.001 | ✅ Yes |
+| **D3** | XGBoost, XGBoost scale_pos_weight, XGBoost + ADASYN, CatBoost | >0.05 | ❌ No |
 
 ---
 
@@ -290,7 +255,7 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 ## 📁 Repository Structure
 
 ```
-fraud-detection-benchmark/
+Multi-Dataset-Fraud-Detection-Benchmark/
 │
 ├── 📊 Datasets/
 │   ├── creditcard.csv
@@ -360,8 +325,8 @@ fraud-detection-benchmark/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/fraud-detection-benchmark.git
-cd fraud-detection-benchmark
+git clone https://github.com/hasnain006/Multi-Dataset-Fraud-Detection-Benchmark.git
+cd Multi-Dataset-Fraud-Detection-Benchmark
 ```
 
 ### 2. Install Dependencies
@@ -444,6 +409,12 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 - **Kaggle** for hosting the datasets
 - **XGBoost, LightGBM, CatBoost** for open-source gradient boosting libraries
 - **SHAP** for explainability tools
+
+---
+
+## 👥 Contributors
+
+- **Hasnain Haider** — [@hasnain006](https://github.com/hasnain006)
 
 ---
 
