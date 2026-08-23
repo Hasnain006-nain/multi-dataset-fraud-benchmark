@@ -60,9 +60,30 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 ---
 
+## 🚀 Workflow Overview
+
+The experimental workflow follows a strict leakage-proof pipeline:
+
+<div align="center">
+<img src="Figures/Fig1.png" alt="Workflow Diagram" width="800">
+</div>
+
+**Pipeline Steps:**
+
+1. **Raw Data** → Train/Validation/Test Split (stratified)
+2. **Preprocessing** fitted on Training Only
+3. **Resampling** (SMOTE/ADASYN) applied only to Training
+4. **Model Training** on resampled training data
+5. **Threshold Tuning** on validation data
+6. **Final Evaluation** on held-out test data
+7. **Explainability & Drift Analysis** using SHAP and statistical tests
+
+---
+
 ## 🧠 Models Evaluated
 
 ### Tree-Based Ensembles
+
 | Model | Training Source | Description |
 |-------|----------------|-------------|
 | **XGBoost** | Original | Gradient boosting with histogram-based training |
@@ -76,6 +97,7 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 | **Random Forest** | Original | Random Forest with balanced subsampling |
 
 ### Deep Learning
+
 | Model | Training Source | Description |
 |-------|----------------|-------------|
 | **MLP + Focal Loss** | Original | 3-layer MLP with Focal Loss |
@@ -106,6 +128,7 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 ### 📊 Performance Comparison Across Models
 
 #### D1: Kaggle Credit Card Fraud
+
 | Model | Threshold | Recall | MCC | PR-AUC | Train Time (s) |
 |-------|-----------|--------|-----|--------|----------------|
 | **LightGBM** | 0.02 | **0.789** | **0.829** | 0.820 | 6.72 |
@@ -121,6 +144,7 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 | **Logistic Regression** | 0.90 | 0.842 | 0.436 | 0.684 | 2.83 |
 
 #### D2: Online Transaction Fraud
+
 | Model | Threshold | Recall | MCC | PR-AUC | Train Time (s) |
 |-------|-----------|--------|-----|--------|----------------|
 | **XGBoost** | 0.03 | **0.942** | 0.647 | **0.911** | 1.61 |
@@ -136,6 +160,7 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 | **Logistic Regression** | 0.59 | 0.748 | 0.190 | 0.171 | 19.50 |
 
 #### D3: PaySim Mobile Money
+
 | Model | Threshold | Recall | MCC | PR-AUC | Train Time (s) |
 |-------|-----------|--------|-----|--------|----------------|
 | **LightGBM** | 0.10 | 0.987 | **0.936** | **0.990** | 2.16 |
@@ -228,8 +253,9 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 ### Global Feature Importance
 
 #### D1: Kaggle Credit Card
-| Rank | Feature | Mean |SHAP |
-|------|---------|-----|
+
+| Rank | Feature | Mean SHAP |
+|------|---------|-----------|
 | 1 | V14 | 2.19 |
 | 2 | V4 | 1.55 |
 | 3 | V11 | 0.67 |
@@ -237,8 +263,9 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 | 5 | V3 | 0.60 |
 
 #### D2: Online Fraud
-| Rank | Feature | Mean |SHAP |
-|------|---------|-----|
+
+| Rank | Feature | Mean SHAP |
+|------|---------|-----------|
 | 1 | amt | 2.33 |
 | 2 | trans_date_trans_time_hour | 0.73 |
 | 3 | trans_date_trans_time_dayofweek | 0.60 |
@@ -246,8 +273,9 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 | 5 | trans_date_trans_time_month | 0.23 |
 
 #### D3: PaySim
-| Rank | Feature | Mean |SHAP |
-|------|---------|-----|
+
+| Rank | Feature | Mean SHAP |
+|------|---------|-----------|
 | 1 | newbalanceOrig | 3.71 |
 | 2 | oldbalanceOrg | 3.38 |
 | 3 | amount | 1.37 |
@@ -317,8 +345,6 @@ fraud-detection-benchmark/
 ├── 💾 Models/
 │   └── [Google Drive](https://drive.google.com/drive/folders/10b67K3d2WEXBNQmuwwzeWhUiEhTVQf4D?usp=drive_link)
 │
-├── 📄 Past Papers/
-│
 ├── 📝 README.md
 ├── 📋 requirements.txt
 └── 📜 LICENSE
@@ -344,6 +370,7 @@ pip install -r requirements.txt
 ### 3. Download Datasets
 
 Place the following datasets in the `Datasets/` directory:
+
 - `creditcard.csv` — [Kaggle Credit Card Fraud](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
 - `fraudTest.csv` — [Online Transaction Fraud](https://www.kaggle.com/datasets/kartik2112/fraud-detection)
 - `PS.csv` — [PaySim Mobile Money](https://www.kaggle.com/datasets/ealaxi/paysim1)
@@ -353,22 +380,6 @@ Place the following datasets in the `Datasets/` directory:
 ```bash
 jupyter notebook Notebooks/Code.ipynb
 ```
-
----
-
-## 🚀 Workflow Overview
-
-![Workflow Diagram](Figures/Fig1.png)
-
-The experimental workflow follows a strict leakage-proof pipeline:
-
-1. **Raw Data** → Train/Validation/Test Split (stratified)
-2. **Preprocessing** fitted on Training Only
-3. **Resampling** (SMOTE/ADASYN) applied only to Training
-4. **Model Training** on resampled training data
-5. **Threshold Tuning** on validation data
-6. **Final Evaluation** on held-out test data
-7. **Explainability & Drift Analysis** using SHAP and statistical tests
 
 ---
 
