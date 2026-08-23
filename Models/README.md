@@ -188,16 +188,6 @@ pip install scikit-learn xgboost lightgbm catboost joblib
 
 ---
 
-## 🔗 Related Resources
-
-| Resource | Link |
-|----------|------|
-| **Main Repository** | [GitHub](https://github.com/hasnain006/Multi-Dataset-Fraud-Detection-Benchmark) |
-| **Datasets** | [Kaggle Credit Card](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud), [Online Fraud](https://www.kaggle.com/datasets/kartik2112/fraud-detection), [PaySim](https://www.kaggle.com/datasets/ealaxi/paysim1) |
-| **Results** | [CSV Files](../Results/) |
-| **Notebook** | [Code.ipynb](../Notebooks/Code.ipynb) |
-
----
 
 ## 📄 License
 
