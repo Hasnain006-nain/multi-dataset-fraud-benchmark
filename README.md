@@ -1,21 +1,21 @@
 # 📊 Multi-Dataset Fraud Detection Benchmark
 
-## A Leakage-Proof Framework for Explainable and Interpretable Financial Fraud Detection Using Tree-Based Ensembles and Neural Networks
+## A Leakage-Controlled Framework for Explainable and Interpretable Financial Fraud Detection Using Tree-Based Ensembles and Neural Networks
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
+![Python](https://img.shields.io/badge/Python-3.12.13-blue?style=for-the-badge&logo=python)
 ![XGBoost](https://img.shields.io/badge/XGBoost-3.3.0-red?style=for-the-badge)
 ![LightGBM](https://img.shields.io/badge/LightGBM-4.6.0-green?style=for-the-badge)
-![CatBoost](https://img.shields.io/badge/CatBoost-1.2.7-purple?style=for-the-badge)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0-orange?style=for-the-badge&logo=pytorch)
+![CatBoost](https://img.shields.io/badge/CatBoost-model-purple?style=for-the-badge)
+![PyTorch](https://img.shields.io/badge/PyTorch-neural_networks-orange?style=for-the-badge&logo=pytorch)
 ![SHAP](https://img.shields.io/badge/SHAP-ExplainableAI-brightgreen?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?style=for-the-badge&logo=jupyter)
 
-**[📄 Research Paper](link-to-paper)** •
-**[📊 Results Dashboard](#-results)** •
-**[🔬 Interactive Notebooks](#-notebooks)**
+**[📊 Experimental Results](#-experimental-results)** •
+**[🔬 Saved Outputs](results/)** •
+**[📓 Reproduction Notebook](notebooks/Code.ipynb)**
 
 </div>
 
@@ -23,13 +23,15 @@
 
 ## 📖 Abstract
 
-Financial fraud detection presents unique challenges including extreme class imbalance, concept drift, and the critical need for explainability. This benchmark study evaluates a comprehensive suite of machine learning and deep learning models across **three diverse fraud datasets** using a **leakage-proof experimental workflow**. We demonstrate that **XGBoost with SMOTE oversampling** achieves the strongest balance between fraud recall, explainability, and real-time performance, while **MLP with Focal Loss** provides competitive deep learning alternatives. The framework incorporates rigorous statistical validation via **McNemar-Holm testing**, **bootstrap confidence intervals**, **SHAP explainability**, and **temporal drift validation**—establishing a robust benchmark for production-ready fraud detection systems.
+Financial fraud benchmarks are sensitive to class imbalance, data leakage, threshold selection, and the relative cost of missed fraud and false alerts. This repository evaluates twelve conventional and neural-network configurations across three public fraud datasets using a leakage-controlled workflow. Data splitting is completed before fitted preprocessing, resampling is restricted to the training partition, validation data are used to select operating thresholds, and the held-out test partition is reserved for final evaluation.
+
+The results do not identify one model as the winner for every dataset and objective. LightGBM leads several discrimination measures, XGBoost records the highest MCC on D2, and XGBoost + ADASYN gives the lowest D1 expected cost under the stated cost setting. The repository also reports bootstrap confidence intervals, exact McNemar tests with Holm correction, alert-budget performance, repeated batched inference latency, calibration, chronological validation, feature-drift diagnostics, and SHAP explanations.
 
 ---
 
 ## 🚀 Workflow Overview
 
-The experimental workflow follows a strict leakage-proof pipeline:
+The experimental workflow follows a leakage-controlled pipeline:
 
 <div align="center">
 <img src="figures/Fig1.png" alt="Workflow Diagram" width="900">
@@ -42,7 +44,7 @@ The experimental workflow follows a strict leakage-proof pipeline:
 | **Input Layer** | Public financial fraud datasets: D1 (Kaggle Credit Card), D2 (Online Fraud Transactions), D3 (PaySim Mobile Money) |
 | **Leakage-Proof Data Preparation** | Duplicate removal, invalid label cleaning, identifier and leakage-column removal, missing/infinite value handling, Train/Validation/Test split *(Preprocessing fitted on training only)* |
 | **Training-Only Preprocessing & Resampling** | Numerical Imputation + Robust Scaling, Categorical Imputation + One-Hot Encoding, Resampling (SMOTE/ADASYN) applied only to training *(Validation and test sets remain naturally imbalanced)* |
-| **Model Benchmarking Layer** | Logistic Regression, Random Forest, Balanced Random Forest, EasyEnsemble, XGBoost, XGBoost + scale_pos_weight, XGBoost + ADASYN, LightGBM, CatBoost, MLP + Focal Loss |
+| **Model Benchmarking Layer** | Logistic Regression, Random Forest, Balanced Random Forest, EasyEnsemble, XGBoost, XGBoost + scale_pos_weight, XGBoost + SMOTE, XGBoost + ADASYN, LightGBM, CatBoost, MLP + Focal Loss, MLP + Focal + SMOTE |
 | **Validation & Operating Threshold Layer** | Threshold tuning only on validation set, Cost-sensitive threshold selection, Frozen threshold for test evaluation |
 | **Final Evaluation Layer** | PR-AUC, Recall, Precision, Expected cost per 10k, False alerts per 10k, Top-k alert budget, Bootstrap 95% confidence intervals, McNemar-Holm statistical testing |
 | **Deployment & Trust Layer** | Repeated inference latency profiling, Temporal/concept-drift validation, Calibration analysis, SHAP global explanations, SHAP local audit |
@@ -54,13 +56,13 @@ The experimental workflow follows a strict leakage-proof pipeline:
 
 | # | Contribution |
 |---|-------------|
-| 1️⃣ | **Multi-Dataset Benchmark** — Evaluation across 3 fraud datasets with varying characteristics |
-| 2️⃣ | **Leakage-Proof Workflow** — Strict train/validation/test separation with preprocessing fitted on training only |
-| 3️⃣ | **Comprehensive Models** — 10+ models including XGBoost, LightGBM, CatBoost, Random Forest, and MLP with Focal Loss |
-| 4️⃣ | **Resampling Strategies** — SMOTE, ADASYN, and cost-sensitive threshold tuning |
-| 5️⃣ | **Statistical Rigor** — McNemar-Holm testing, bootstrap 95% CIs, and temporal drift analysis |
-| 6️⃣ | **Explainability** — SHAP global and local interpretations |
-| 7️⃣ | **Deployment Metrics** — Inference latency profiling and top-k alert budget analysis |
+| 1️⃣ | **Multi-Dataset Benchmark**: Evaluation across 3 fraud datasets with varying characteristics |
+| 2️⃣ | **Leakage-Controlled Workflow**: Strict train/validation/test separation with preprocessing fitted on training only |
+| 3️⃣ | **Comprehensive Models**: 12 evaluated configurations including XGBoost, LightGBM, CatBoost, Random Forest, and MLP with Focal Loss |
+| 4️⃣ | **Resampling Strategies**: SMOTE, ADASYN, and cost-sensitive threshold tuning |
+| 5️⃣ | **Statistical Rigor**: exact McNemar testing with Holm correction, bootstrap 95% confidence intervals, and chronological validation |
+| 6️⃣ | **Explainability**: SHAP global and local interpretations |
+| 7️⃣ | **Deployment Metrics**: Inference latency profiling and top-k alert budget analysis |
 
 ---
 
@@ -70,9 +72,9 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 | Dataset | Source File | Original Rows | Rows Used | Fraud Cases | Fraud Rate | Features |
 |---------|-------------|---------------|-----------|-------------|------------|----------|
-| **D1: Kaggle Credit Card** | `creditcard.csv` | 283,726 | 283,726 | 473 | 0.167% | 30 |
-| **D2: Online Fraud** | `fraudTest.csv` | 555,719 | 300,000 | 2,145 | 0.715% | 769 |
-| **D3: PaySim Mobile Money** | `PS.csv` | 5,840,045 | 200,000 | 4,497 | 2.249% | 11 |
+| **D1: Kaggle Credit Card** | `creditcard.csv` | 283,726 | 283,726 | 473 | 0.1667% | 30 |
+| **D2: Online Fraud** | `fraudTest.csv` | 555,719 | 300,000 | 2,145 | 0.7150% | 769 |
+| **D3: PaySim Mobile Money** | `PS.csv` | 5,840,045 | 200,000 | 4,497 | 2.2485% | 11 |
 
 ### 📥 Dataset Sources
 
@@ -86,10 +88,11 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 ## 🧠 Models Evaluated
 
-### Tree-Based Ensembles
+### Conventional and Ensemble Models
 
 | Model | Training Source | Description |
 |-------|----------------|-------------|
+| **Logistic Regression** | Original | Linear baseline with class weighting |
 | **XGBoost** | Original | Gradient boosting with histogram-based training |
 | **XGBoost + SMOTE** | SMOTE | XGBoost with SMOTE oversampling |
 | **XGBoost + ADASYN** | ADASYN | XGBoost with ADASYN oversampling |
@@ -111,21 +114,31 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 ## 🏆 Experimental Results
 
-### 🥇 Best Overall Model: **XGBoost + SMOTE**
+No single configuration leads on every dataset and objective. The principal results are summarized below.
+
+| Dataset | MCC Leader | PR AUC Leader | Cost Observation |
+|---------|------------|---------------|------------------|
+| **D1** | LightGBM: 0.8295 | LightGBM: 0.8197 | XGBoost + ADASYN: 305.40 per 10,000, the lowest among all evaluated configurations |
+| **D2** | XGBoost: 0.6474 | LightGBM: 0.9227 | LightGBM: 394.50 per 10,000, below XGBoost and XGBoost + SMOTE |
+| **D3** | LightGBM: 0.9364 | LightGBM: 0.9904 | XGBoost: 270.25 per 10,000 among the three principal boosting configurations |
+
+Expected cost uses a false-negative cost of 100 and a false-positive cost of 1. In the saved outputs, PR AUC is calculated with average precision.
+
+### Selected XGBoost + SMOTE Results
 
 | Dataset | Threshold | Recall | Precision | MCC | ROC-AUC | PR-AUC | False Alerts /10k | Missed Frauds /10k | Expected Cost /10k |
 |---------|-----------|--------|-----------|-----|---------|--------|-------------------|-------------------|-------------------|
-| **D1 (Kaggle CC)** | 0.74 | **0.800** | 0.745 | **0.772** | 0.968 | 0.801 | 4.58 | 3.35 | 339.41 |
-| **D2 (Online Fraud)** | 0.07 | **0.958** | 0.237 | 0.470 | 0.994 | 0.829 | 220.83 | 3.00 | 520.83 |
-| **D3 (PaySim)** | 0.48 | **0.988** | 0.819 | **0.897** | 0.999 | 0.987 | 49.00 | 2.75 | 324.00 |
+| **D1 (Kaggle CC)** | 0.74 | 0.800 | 0.745 | 0.772 | 0.968 | 0.801 | 4.58 | 3.35 | 339.41 |
+| **D2 (Online Fraud)** | 0.07 | 0.958 | 0.237 | 0.470 | 0.994 | 0.829 | 220.83 | 3.00 | 520.83 |
+| **D3 (PaySim)** | 0.48 | 0.988 | 0.819 | 0.897 | 0.999 | 0.987 | 49.00 | 2.75 | 324.00 |
 
-### 🥈 Best Deep Learning Model: **MLP + Focal Loss + SMOTE**
+### Selected MLP + Focal Loss + SMOTE Results
 
 | Dataset | Threshold | Recall | Precision | MCC | ROC-AUC | PR-AUC | False Alerts /10k | Missed Frauds /10k | Expected Cost /10k |
 |---------|-----------|--------|-----------|-----|---------|--------|-------------------|-------------------|-------------------|
 | **D1 (Kaggle CC)** | 0.53 | 0.789 | 0.647 | 0.714 | 0.948 | 0.783 | 7.23 | 3.52 | 359.67 |
 | **D2 (Online Fraud)** | 0.02 | 0.513 | 0.083 | 0.194 | 0.826 | 0.179 | 404.67 | 34.83 | 3888.00 |
-| **D3 (PaySim)** | 0.42 | **0.982** | 0.584 | 0.751 | 0.997 | 0.957 | 157.25 | 4.00 | 557.25 |
+| **D3 (PaySim)** | 0.42 | 0.982 | 0.584 | 0.751 | 0.997 | 0.957 | 157.25 | 4.00 | 557.25 |
 
 ---
 
@@ -135,7 +148,7 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 | Model | Threshold | Recall | MCC | PR-AUC | Train Time (s) |
 |-------|-----------|--------|-----|--------|----------------|
-| **LightGBM** | 0.02 | **0.789** | **0.829** | 0.820 | 6.72 |
+| **LightGBM** | 0.02 | 0.789 | 0.829 | 0.820 | 6.72 |
 | **XGBoost** | 0.05 | 0.800 | 0.813 | 0.819 | 5.52 |
 | **XGBoost + SMOTE** | 0.74 | 0.800 | 0.772 | 0.801 | 3.69 |
 | **Random Forest** | 0.04 | 0.821 | 0.746 | 0.810 | 29.34 |
@@ -151,7 +164,7 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 | Model | Threshold | Recall | MCC | PR-AUC | Train Time (s) |
 |-------|-----------|--------|-----|--------|----------------|
-| **XGBoost** | 0.03 | **0.942** | 0.647 | **0.911** | 1.61 |
+| **XGBoost** | 0.03 | 0.942 | 0.647 | 0.911 | 1.61 |
 | **LightGBM** | 0.03 | 0.958 | 0.631 | 0.923 | 4.21 |
 | **XGBoost scale_pos_weight** | 0.44 | 0.939 | 0.618 | 0.895 | 1.61 |
 | **CatBoost** | 0.50 | 0.949 | 0.570 | 0.857 | 7.21 |
@@ -167,7 +180,7 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 | Model | Threshold | Recall | MCC | PR-AUC | Train Time (s) |
 |-------|-----------|--------|-----|--------|----------------|
-| **LightGBM** | 0.10 | 0.987 | **0.936** | **0.990** | 2.16 |
+| **LightGBM** | 0.10 | 0.987 | 0.936 | 0.990 | 2.16 |
 | **XGBoost** | 0.09 | 0.990 | 0.905 | 0.989 | 0.84 |
 | **XGBoost + SMOTE** | 0.48 | 0.988 | 0.897 | 0.987 | 1.29 |
 | **XGBoost + ADASYN** | 0.74 | 0.984 | 0.897 | 0.985 | 1.25 |
@@ -183,20 +196,24 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 ## ⚡ Deployment Analysis
 
-### Inference Latency (p95 microseconds per transaction)
+### Repeated Inference Latency
+
+The table reports the 95th percentile of repeated batched prediction time in microseconds per transaction.
 
 | Model | D1 (Kaggle CC) | D2 (Online Fraud) | D3 (PaySim) |
 |-------|----------------|-------------------|-------------|
-| **Logistic Regression** | 0.12 | 0.09 | 0.07 |
-| **CatBoost** | 0.59 | 1.04 | 0.46 |
-| **XGBoost** | 1.18 | 1.72 | 1.36 |
-| **XGBoost + SMOTE** | 1.19 | 3.63 | 1.06 |
-| **XGBoost + ADASYN** | 1.09 | 1.49 | 1.05 |
-| **LightGBM** | 4.40 | 8.24 | 5.13 |
-| **Balanced RF** | 16.02 | 16.15 | 15.65 |
-| **Random Forest** | 15.82 | 16.18 | 16.02 |
-| **EasyEnsemble** | 30.92 | 29.73 | 27.89 |
-| **MLP + Focal + SMOTE** | 0.22 | 1.57 | 0.18 |
+| **Logistic Regression** | 0.12 | 0.09 | 0.08 |
+| **CatBoost** | 0.65 | 1.15 | 0.51 |
+| **XGBoost** | 1.13 | 1.89 | 4.43 |
+| **XGBoost + SMOTE** | 1.34 | 6.13 | 1.07 |
+| **XGBoost + ADASYN** | 1.09 | 1.50 | 1.11 |
+| **LightGBM** | 6.49 | 9.95 | 7.55 |
+| **Balanced RF** | 16.28 | 16.39 | 16.18 |
+| **Random Forest** | 16.26 | 16.44 | 16.22 |
+| **EasyEnsemble** | 35.36 | 35.13 | 34.20 |
+| **MLP + Focal + SMOTE** | 0.23 | 1.68 | 0.19 |
+
+These measurements use 20 warm-up calls followed by 100 timed predictions on batches of 4,096 rows. Each batch time is divided by the batch size. The values are not individual-request latency percentiles and exclude upstream feature processing, transport, and queueing. See [the saved latency protocol](results/11_repeated_latency_protocol.csv).
 
 ---
 
@@ -211,10 +228,11 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 | **D1** | XGBoost + ADASYN | 5.47e-27 | ✅ Yes |
 | **D1** | CatBoost | 1.29e-08 | ✅ Yes |
 | **D1** | XGBoost, XGBoost scale_pos_weight, LightGBM, MLP + Focal Loss, MLP + Focal + SMOTE, Random Forest, Balanced RF | >0.05 | ❌ No |
-| **D2** | All models except XGBoost, XGBoost scale_pos_weight | <0.001 | ✅ Yes |
-| **D2** | XGBoost, XGBoost scale_pos_weight | <0.001 | ✅ Yes |
+| **D2** | All comparison models | <0.001 | ✅ Yes |
 | **D3** | Logistic Regression, EasyEnsemble, LightGBM, Random Forest, Balanced RF, MLP + Focal Loss, MLP + Focal + SMOTE | <0.001 | ✅ Yes |
 | **D3** | XGBoost, XGBoost scale_pos_weight, XGBoost + ADASYN, CatBoost | >0.05 | ❌ No |
+
+The exact McNemar tests compare paired correctness outcomes at validation-selected thresholds. A non-significant result does not establish equivalence, and these tests do not directly compare MCC or PR AUC.
 
 ---
 
@@ -256,19 +274,12 @@ The benchmark uses three publicly available fraud detection datasets with varyin
 
 ## 📁 Repository Structure
 
-```
-Multi-Dataset-Fraud-Detection-Benchmark/
-│
-├── 📊 Datasets/
-│   ├── creditcard.csv
-│   ├── fraudTest.csv
-│   └── PS.csv
-│
-├── 📓 Notebooks/
-│   └── Code.ipynb
-│
-├── 📈 Figures/
-│   ├── Fig1.png (Workflow Diagram)
+```text
+multi-dataset-fraud-benchmark/
+├── Models/
+├── datasets/
+├── figures/
+│   ├── Fig1.png
 │   ├── 02_class_distribution_before_resampling.png
 │   ├── 03_class_distribution_after_resampling.png
 │   ├── 04_model_performance_recall_mcc_prauc.png
@@ -282,14 +293,10 @@ Multi-Dataset-Fraud-Detection-Benchmark/
 │   ├── 12_shap_global_D1_Kaggle_CC.png
 │   ├── 12_shap_global_D2_Online_Fraud.png
 │   ├── 12_shap_global_D3_PaySim.png
-│   ├── 13_shap_local_true_positive_D1_Kaggle_CC.png
-│   ├── 13_shap_local_true_positive_D2_Online_Fraud.png
-│   ├── 13_shap_local_true_positive_D3_PaySim.png
-│   ├── 13_shap_local_false_positive_D1_Kaggle_CC.png
-│   ├── 13_shap_local_false_positive_D2_Online_Fraud.png
-│   └── 13_shap_local_false_positive_D3_PaySim.png
-│
-├── 📊 Results/
+│   └── 13_shap_local_*.png
+├── notebooks/
+│   └── Code.ipynb
+├── results/
 │   ├── 00_environment.csv
 │   ├── 01_dataset_audit.csv
 │   ├── 02_class_distribution_before_resampling.csv
@@ -311,14 +318,12 @@ Multi-Dataset-Fraud-Detection-Benchmark/
 │   ├── 18_shap_global_feature_importance.csv
 │   ├── 19_shap_local_explanations.csv
 │   └── 20_manuscript_model_summary.csv
-│
-├── 💾 Models/
-│   └── [Google Drive](https://drive.google.com/drive/folders/10b67K3d2WEXBNQmuwwzeWhUiEhTVQf4D?usp=drive_link)
-│
-├── 📝 README.md
-├── 📋 requirements.txt
-└── 📜 LICENSE
+├── LICENSE
+├── README.md
+└── requirements.txt
 ```
+
+Raw datasets are downloaded separately and placed in `datasets/`. Saved model artifacts are indexed under [`Models/`](Models/).
 
 ---
 
@@ -327,53 +332,61 @@ Multi-Dataset-Fraud-Detection-Benchmark/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/hasnain006/Multi-Dataset-Fraud-Detection-Benchmark.git
-cd Multi-Dataset-Fraud-Detection-Benchmark
+git clone https://github.com/Hasnain006-nain/multi-dataset-fraud-benchmark.git
+cd multi-dataset-fraud-benchmark
 ```
 
 ### 2. Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-### 3. Download Datasets
+### 3. Download the Datasets
 
-Place the following datasets in the `Datasets/` directory:
+Place the following files in the `datasets/` directory:
 
-- `creditcard.csv` — [Kaggle Credit Card Fraud](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
-- `fraudTest.csv` — [Online Transaction Fraud](https://www.kaggle.com/datasets/kartik2112/fraud-detection)
-- `PS.csv` — [PaySim Mobile Money](https://www.kaggle.com/datasets/ealaxi/paysim1)
+- `creditcard.csv`: [Kaggle Credit Card Fraud](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
+- `fraudTest.csv`: [Online Transaction Fraud](https://www.kaggle.com/datasets/kartik2112/fraud-detection)
+- `PS.csv`: [PaySim Mobile Money](https://www.kaggle.com/datasets/ealaxi/paysim1)
+
+Users must follow the license and access conditions stated by each dataset provider.
 
 ### 4. Run the Notebook
 
 ```bash
-jupyter notebook Notebooks/Code.ipynb
+jupyter notebook notebooks/Code.ipynb
 ```
+
+## ♻️ Reproducibility
+
+The manuscript tables correspond to saved run `20260814_134324`. The recorded environment used Python 3.12.13, XGBoost 3.3.0, LightGBM 4.6.0, an NVIDIA A100-SXM4-40GB GPU, and 300 bootstrap replicates. Full audit, threshold, test, calibration, statistical, drift, SHAP, and latency outputs are stored in [`results/`](results/).
+
+For an exact comparison, use the saved result files. A fresh run can differ because of library, hardware, or dataset-version changes.
 
 ---
 
 ## 📊 Key Findings
 
-### 🔥 SMOTE + XGBoost Achieves the Best Balance Between:
+### Model Choice Depends on the Objective
 
-✅ **Fraud Recall** — Detects >95% of fraud cases across all datasets  
-✅ **Explainability** — SHAP provides clear feature importance  
-✅ **Real-Time Performance** — Inference latency <5 microseconds per transaction  
-✅ **Cross-Dataset Robustness** — Consistent performance across diverse fraud patterns  
-✅ **Statistical Significance** — McNemar-Holm confirms superiority over baselines  
+- XGBoost + SMOTE records recall values of 0.8000 on D1, 0.9580 on D2, and 0.9878 on D3.
+- LightGBM has the highest MCC on D1 and D3 and the highest PR AUC on all three datasets.
+- XGBoost has the highest MCC on D2.
+- XGBoost + ADASYN gives the lowest D1 expected cost under the stated cost setting, while producing more false alerts.
+- The McNemar-Holm results are mixed and do not establish universal superiority for one model.
 
-### 📈 Focal Loss Improves Deep Learning Performance
+### Neural-Network Results
 
-- MLP + Focal Loss + SMOTE achieves competitive recall (0.982 on PaySim)
-- Improves over standard cross-entropy by focusing on hard examples
-- Training time significantly higher than tree-based models
+- MLP + Focal Loss + SMOTE reaches 0.982 recall on D3.
+- Its D2 results are substantially weaker than the leading boosting models.
+- Neural-network training is slower than most boosting configurations in the recorded experiment.
 
-### 🔍 Feature Importance Reveals Consistent Patterns
+### SHAP Feature Findings
 
-- **Transaction amount** is the most important feature across datasets
-- **Time-based features** (hour, dayofweek) are consistently important
-- **Account balance features** dominate in mobile money fraud
+- `V14` has the largest mean absolute SHAP value on D1.
+- Transaction amount (`amt`) leads on D2, followed by time-derived and category features.
+- Origin-account balance features (`newbalanceOrig` and `oldbalanceOrg`) lead on D3.
 
 ---
 
@@ -389,20 +402,13 @@ jupyter notebook Notebooks/Code.ipynb
 
 ## 📝 Citation
 
-```bibtex
-@article{haider2026fraudbenchmark,
-  title={Beyond Single-Dataset Evaluation: A Leakage-Proof Framework for Explainable Fraud Detection Using Tree-Based Ensembles and Neural Networks},
-  author={Haider, Hasnain},
-  journal={arXiv preprint},
-  year={2026}
-}
-```
+A formal paper citation will be added after a public publication record is available. Until then, cite the [repository](https://github.com/Hasnain006-nain/multi-dataset-fraud-benchmark) and record the commit hash used for the analysis.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -416,7 +422,7 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## 👥 Contributors
 
-- **Hasnain Haider** — [@hasnain006](https://github.com/Hasnain006-nain)
+- **Hasnain Haider**: [@Hasnain006-nain](https://github.com/Hasnain006-nain)
 
 ---
 
@@ -427,3 +433,4 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 **[⬆ Back to Top](#-multi-dataset-fraud-detection-benchmark)**
 
 </div>
+
